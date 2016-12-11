@@ -12,6 +12,7 @@ import java.io.IOException;
 import java.util.HashSet;
 import java.util.Random;
 import java.util.Set;
+import Items.Items;
 
 /**
  *
@@ -51,17 +52,17 @@ public final class Room {
         } else if (i == 1) {
             roomDescription = "in a place far away, where you can't find a netto...";
         } else if (i == 2) {
-            roomDescription = "in a place where Winter's coming";
+            roomDescription = "at the wall and 'Winter's coming' ";
         } else if (i == 3) {
-            roomDescription = "In Da Forest, where the wolves got the munchies";
+            roomDescription = "In Da Smookey Forest, where the wolves got the munchies ";
         } else if (i == 4) {
             roomDescription =
-                    "a thick forest where strange voices call out from the trees high above";
+                    "a thick forest where everyone is high as the trees ";
         } else if (i == 5) {
             roomDescription =
-                    "ERMAHGERD BERKS BERBER HERPERPERTERMERSE with BERTMERN";
+                    "ERMAHGERD BERKS BERBER HERPERPERTERMERSE with BERTMERN ";
         } else if (i == 6) {
-            roomDescription = "In roskilde festival and there's no hot water....";
+            roomDescription = "In roskilde festival and there's no hot water.... ";
         } else {
         }
         return new Room(roomDescription, Monster.newRandomInstance(), false);

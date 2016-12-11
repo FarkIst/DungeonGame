@@ -8,6 +8,10 @@ package dungeongame;
 import dungeongame.Monster;
 import java.util.Random;
 import java.util.Scanner;
+import Items.Items;
+import Items.Weapon;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  *
@@ -26,6 +30,8 @@ public final class Player {
     int numPotions;
     private final int minDamage;
     private final int maxDamage;
+    private final List<Items> inventory;
+    
     private final Random random = new Random();
     
 
@@ -42,6 +48,7 @@ public final class Player {
         this.maxDamage = maxDamage;
         this.numPotions = numPotions;
         this.hitPoints = maxHitPoints;
+        this.inventory = new ArrayList<>();
        
         
     }
@@ -49,7 +56,7 @@ public final class Player {
    
 
     public int attack() {
-        return random.nextInt(maxDamage - minDamage + 1) + minDamage;
+        return random.nextInt((maxDamage + Weapon.attack) - minDamage + 1) + minDamage;
     }
 
     public void defend(Monster monster) {
@@ -71,6 +78,12 @@ public final class Player {
         } else {
             System.out.println("  You've exhausted your potion supply!");
         }
+    }
+    
+    public void stats()
+    {
+        
+        System.out.println("Attack: " + attack());
     }
     
 
@@ -98,7 +111,7 @@ public final class Player {
     }
     public static Player newInstance() {
         return new Player(" ",
-                "A mighty warrior, who can not find the other pair of the sock", 100, 6, 20, 10);
+                "A mighty warrior, on a quest to find his long lost midget twin brother", 50, 6, 20, 10);
     }
    
 }

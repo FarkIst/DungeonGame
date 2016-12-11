@@ -83,7 +83,7 @@ public final class Dungeon {
         currentRoom.enter(player);
     }
 
-    public void startQuest(Player player) throws IOException {
+    public boolean startQuest(Player player) throws IOException {
         while (player.isAlive() && !isComplete()) {
             movePlayer(player);
             
@@ -91,8 +91,9 @@ public final class Dungeon {
         if (player.isAlive()) {
             System.out.println(Monster.CROWN);
         } else {
-            System.out.println(Monster.REAPER);
+           return Monster.REAPER;
         }
+        return false;
     }
     
    
