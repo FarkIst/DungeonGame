@@ -6,6 +6,7 @@
 package dungeongame;
 
 
+import HighScore.IHighscore;
 import java.io.IOException;
 import java.util.Scanner;
 
@@ -15,7 +16,7 @@ import java.util.Scanner;
  */
 public class Game {
 
- 
+   
 
     private final Player player = Player.newInstance();
 

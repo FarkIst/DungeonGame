@@ -10,6 +10,7 @@ import java.util.Random;
 import java.util.Scanner;
 import Items.Items;
 import Items.Weapon;
+import static dungeongame.Monster.Doge;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -30,13 +31,15 @@ public final class Player {
     int numPotions;
     private final int minDamage;
     private final int maxDamage;
-    private final List<Items> inventory;
+    static List<Items> inventory;
+    int playerGold = 0;
+    
     
     private final Random random = new Random();
     
 
     private Player(String name, String description, int maxHitPoints, int minDamage, int maxDamage,
-            int numPotions) {
+            int numPotions, int gold) {
         Scanner in = new Scanner(System.in);
        System.out.println(" Welcome to the dungeon, Lel\n"
                 + " Enter your name: ");
@@ -49,6 +52,7 @@ public final class Player {
         this.numPotions = numPotions;
         this.hitPoints = maxHitPoints;
         this.inventory = new ArrayList<>();
+        this.playerGold = gold;
        
         
     }
@@ -56,7 +60,7 @@ public final class Player {
    
 
     public int attack() {
-        return random.nextInt((maxDamage + Weapon.attack) - minDamage + 1) + minDamage;
+        return random.nextInt((maxDamage + Weapon.getAttack()) - minDamage + 1) + minDamage;
     }
 
     public void defend(Monster monster) {
@@ -64,12 +68,41 @@ public final class Player {
         hitPoints = (hitPoints > attackStrength) ? hitPoints - attackStrength : 0;
         System.out.printf("  " + name + " is hit for %d HP of damage (%s)\n", attackStrength,
                 getStatus());
+              
         if (hitPoints == 0) {
             System.out.println("  " + name + " Damn son, you deadead");
         }
     }
     
+     public int getGold()
+    {
+        return playerGold;
+    }
 
+     public void addGold()
+     {
+        if(Monster.dog = true)
+        {
+            playerGold = playerGold + 50;
+        }
+         if(Monster.steve = true)
+        {
+            playerGold = playerGold + 25;
+        }
+          if(Monster.brian = true)
+        {
+            playerGold = playerGold + 10;
+        }
+           if(Monster.kim = true)
+        {
+            playerGold = playerGold + 100;
+        }
+           else
+           {
+               playerGold = playerGold;
+           }
+     }
+     
     public void heal() {
         if (numPotions > 0) {
             hitPoints = Math.min(maxHitPoints, hitPoints + 20);
@@ -87,6 +120,7 @@ public final class Player {
     }
     
 
+    
     public boolean isAlive() {
         return hitPoints > 0;
     }
@@ -99,6 +133,12 @@ public final class Player {
         return "Player HP: " + hitPoints;
     }
     
+public List<Items> getInventory()
+    {
+        return inventory;
+        
+    }
+        
    
 
     @Override
@@ -111,7 +151,7 @@ public final class Player {
     }
     public static Player newInstance() {
         return new Player(" ",
-                "A mighty warrior, on a quest to find his long lost midget twin brother", 50, 6, 20, 10);
+                "A mighty warrior, on a quest to find his long lost midget twin brother", 50, 6, 20, 10, 0);
     }
    
 }

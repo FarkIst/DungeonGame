@@ -7,6 +7,8 @@ package dungeongame;
 
 
 
+import HighScore.FileHighscore;
+import HighScore.IHighscore;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -48,13 +50,16 @@ public final class Dungeon {
     private boolean isComplete() {
         return currentRoom.isBossRoom() && currentRoom.isComplete();
     }
-
+    
+    
     public void movePlayer(Player player) throws IOException {
         boolean northPossible = roomExists(currentX, currentY + 1);
         boolean southPossible = roomExists(currentX, currentY - 1);
         boolean eastPossible = roomExists(currentX + 1, currentY);
         boolean westPossible = roomExists(currentX - 1, currentY);
-        System.out.print("Choose your path :");
+        System.out.print("Chose your path, or check inventory \n");
+        
+        
         if (northPossible) {
             System.out.print(" North (n)");
         }
@@ -70,15 +75,37 @@ public final class Dungeon {
         System.out.print(" ? ");
         BufferedReader in = new BufferedReader(new InputStreamReader(System.in));
         String direction = in.readLine();
+        
+        if(direction.equals("inventory")){
+            System.out.println("Inventory: "+ player.getInventory()+" Gold:"+player.getGold());
+        }
+        
         if (direction.equals("n") && northPossible) {
             currentY++;
-        } else if (direction.equals("s") && southPossible) {
+        }
+        else if (direction.equals("n")&& !northPossible){
+            System.out.println("I have to learn how to read");
+        }
+        else if (direction.equals("s") && southPossible) {
             currentY--;
-        } else if (direction.equals("e") && eastPossible) {
+        } 
+         else if (direction.equals("s")&& !northPossible){
+            System.out.println("I have to learn how to read");
+        }
+        else if (direction.equals("e") && eastPossible) {
             currentX++;
-        } else if (direction.equals("w") && westPossible) {
+        }
+         else if (direction.equals("e")&& !northPossible){
+            System.out.println("I have to learn how to read");
+        }
+        
+        else if (direction.equals("w") && westPossible) {
             currentX--;
         }
+         else if (direction.equals("w")&& !northPossible){
+            System.out.println("I have to learn how to read");
+        }
+    
         currentRoom = getRoom(currentX, currentY);
         currentRoom.enter(player);
     }
@@ -113,5 +140,7 @@ public final class Dungeon {
         dungeon.currentRoom = dungeon.getRoom(0, 0);
         return dungeon;
     }
+    
+    IHighscore highscore = new FileHighscore("highscore.txt");
 
 }

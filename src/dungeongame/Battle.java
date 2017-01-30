@@ -5,6 +5,8 @@
  */
 package dungeongame;
 
+import Items.Items;
+import Items.Weapon;
 import dungeongame.Monster;
 import dungeongame.Player;
 import java.io.BufferedReader;
@@ -18,6 +20,7 @@ import java.io.InputStreamReader;
 public final class Battle {
 
     public Battle(Player player, Monster monster) throws IOException {
+        monster.drop();
         System.out.println("You encounter " + monster + ": " + monster.getDescription() + "\n");
         System.out.println("Battle with " + monster + " starts (" + player.getStatus() + " / "
                 + monster.getStatus() + ")");
@@ -32,6 +35,18 @@ public final class Battle {
             }
             if (monster.isAlive()) {
                 player.defend(monster);
+            }
+            else if (!monster.isAlive())
+            {
+                
+                player.addGold();
+                System.out.println("The monster dropped: " + Items.name + " "+" and " );
+                for(Items item : player.inventory)
+                {
+                    
+                    System.out.println(" "+item.getName()+ " added to your inventory");
+                    break;
+                }
             }
         }
     }
